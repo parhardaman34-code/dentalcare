@@ -51,8 +51,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- Custom Stylesheet -->
+  <!-- Custom Stylesheet (Supports both folder and flat structure) -->
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body class="bg-white text-slate-900 antialiased selection:bg-teal-100 selection:text-teal-800">
 
@@ -108,13 +109,11 @@
         </a>
 
         <!-- Desktop Navigation Links (with whitespace-nowrap to prevent ugly wrapping) -->
-        <nav class="hidden lg:flex items-center gap-5 xl:gap-7" aria-label="Main Navigation">
+        <nav class="hidden lg:flex items-center gap-6 xl:gap-8" aria-label="Main Navigation">
           <a href="#services" class="text-sm font-semibold text-slate-700 hover:text-teal-600 transition-colors whitespace-nowrap">Services</a>
-          <a href="#transformations" class="text-sm font-semibold text-slate-700 hover:text-teal-600 transition-colors whitespace-nowrap">Before &amp; After</a>
           <a href="#about-doctor" class="text-sm font-semibold text-slate-700 hover:text-teal-600 transition-colors whitespace-nowrap">About Doctor</a>
-          <a href="#hygiene-tech" class="text-sm font-semibold text-slate-700 hover:text-teal-600 transition-colors whitespace-nowrap">Sterilization</a>
           <a href="#reviews" class="text-sm font-semibold text-slate-700 hover:text-teal-600 transition-colors whitespace-nowrap">Reviews</a>
-          <a href="#contact" class="text-sm font-semibold text-slate-700 hover:text-teal-600 transition-colors whitespace-nowrap">Contact</a>
+          <a href="#contact" class="text-sm font-semibold text-slate-700 hover:text-teal-600 transition-colors whitespace-nowrap">Timings &amp; Location</a>
         </nav>
 
         <!-- Right Action CTAs -->
@@ -159,9 +158,7 @@
       </div>
       <div class="flex flex-col gap-3">
         <a href="#services" class="mobile-nav-link text-base font-semibold text-slate-800 hover:text-teal-600 py-2 border-b border-slate-100">Core Services</a>
-        <a href="#transformations" class="mobile-nav-link text-base font-semibold text-slate-800 hover:text-teal-600 py-2 border-b border-slate-100">Smile Makeovers (Before &amp; After)</a>
         <a href="#about-doctor" class="mobile-nav-link text-base font-semibold text-slate-800 hover:text-teal-600 py-2 border-b border-slate-100">Meet Chief Dentist (Dr. Aryan)</a>
-        <a href="#hygiene-tech" class="mobile-nav-link text-base font-semibold text-slate-800 hover:text-teal-600 py-2 border-b border-slate-100">Sterilization &amp; Painless Protocol</a>
         <a href="#reviews" class="mobile-nav-link text-base font-semibold text-slate-800 hover:text-teal-600 py-2 border-b border-slate-100">Google Reviews (4.9/5)</a>
         <a href="#contact" class="mobile-nav-link text-base font-semibold text-slate-800 hover:text-teal-600 py-2 border-b border-slate-100">Timings &amp; Map Location</a>
         
@@ -352,6 +349,18 @@
             </p>
           </div>
 
+          <!-- Selected Treatment Notice Pill (Shows when user clicks 'Book RCT' etc.) -->
+          <div id="booking-selected-banner" class="hidden mb-6 max-w-lg mx-auto p-3 sm:p-3.5 rounded-2xl bg-teal-500/20 border border-teal-400/40 text-teal-200 text-xs sm:text-sm font-semibold flex items-center justify-between gap-3">
+            <div class="flex items-center gap-2.5">
+              <span class="relative flex h-2.5 w-2.5">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-teal-400"></span>
+              </span>
+              <span>Selected Procedure: <strong id="selected-treatment-name" class="text-white font-bold">Root Canal (RCT)</strong></span>
+            </div>
+            <span class="text-[11px] px-2.5 py-1 rounded-full bg-teal-400/25 text-teal-200 border border-teal-400/40 whitespace-nowrap">Slot Active</span>
+          </div>
+
           <!-- Interactive Form -->
           <form id="appointment-form" class="space-y-4 sm:space-y-6">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
@@ -391,14 +400,16 @@
                   <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                     <svg class="w-4 h-4 fill-none stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
                   </div>
-                  <select id="booking-treatment" required class="w-full pl-10 pr-8 py-3 rounded-xl bg-slate-800 border border-white/20 text-white text-sm focus:outline-none focus:ring-2 focus:ring-teal-400 transition-all appearance-none cursor-pointer">
-                    <option value="" disabled selected>Select dental concern</option>
-                    <option value="Tooth Pain / Emergency">Tooth Pain / Emergency (Priority)</option>
-                    <option value="Routine Cleaning & Polishing">Routine Cleaning &amp; Polishing</option>
-                    <option value="Root Canal (RCT)">Root Canal (Painless Rotary RCT)</option>
-                    <option value="Braces / Clear Aligners">Braces / Clear Aligners</option>
-                    <option value="Dental Implants">Dental Implants (Permanent)</option>
-                    <option value="Kids Dentistry">Kids Dentistry (Pediatric)</option>
+                  <select id="booking-treatment" required class="w-full pl-10 pr-8 py-3 rounded-xl bg-slate-800 text-white border border-white/20 text-sm focus:outline-none focus:ring-2 focus:ring-teal-400 transition-all appearance-none cursor-pointer">
+                    <option value="" disabled selected class="bg-slate-900 text-slate-400">Select dental concern / treatment</option>
+                    <option value="Root Canal (RCT)" class="bg-slate-900 text-white font-medium">Root Canal (Painless Rotary RCT)</option>
+                    <option value="Dental Implants" class="bg-slate-900 text-white font-medium">Dental Implants (Permanent Tooth)</option>
+                    <option value="Braces / Clear Aligners" class="bg-slate-900 text-white font-medium">Braces / Clear Aligners</option>
+                    <option value="Laser Teeth Whitening" class="bg-slate-900 text-white font-medium">Laser Teeth Whitening (45 Mins)</option>
+                    <option value="Wisdom Tooth Extraction" class="bg-slate-900 text-white font-medium">Wisdom Tooth Extraction (Painless)</option>
+                    <option value="Routine Cleaning & Polishing" class="bg-slate-900 text-white font-medium">Routine Cleaning &amp; Polishing</option>
+                    <option value="Kids Dentistry" class="bg-slate-900 text-white font-medium">Kids Dentistry (Pediatric Care)</option>
+                    <option value="Tooth Pain / Emergency" class="bg-slate-900 text-rose-300 font-medium">Tooth Pain / Dental Emergency (Priority)</option>
                   </select>
                   <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-slate-400">
                     <svg class="w-4 h-4 fill-none stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
@@ -416,8 +427,8 @@
                     <svg class="w-4 h-4 fill-none stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                   </div>
                   <select id="booking-shift" required class="w-full pl-10 pr-8 py-3 rounded-xl bg-slate-800 border border-white/20 text-white text-sm focus:outline-none focus:ring-2 focus:ring-teal-400 transition-all appearance-none cursor-pointer">
-                    <option value="Morning OP (9:30 AM - 2:00 PM)">Morning OP (9:30 AM - 2:00 PM)</option>
-                    <option value="Evening OP (4:30 PM - 8:30 PM)" selected>Evening OP (4:30 PM - 8:30 PM)</option>
+                    <option value="Morning OP (9:30 AM - 2:00 PM)" class="bg-slate-900 text-white">Morning OP (9:30 AM - 2:00 PM)</option>
+                    <option value="Evening OP (4:30 PM - 8:30 PM)" selected class="bg-slate-900 text-white">Evening OP (4:30 PM - 8:30 PM)</option>
                   </select>
                   <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-slate-400">
                     <svg class="w-4 h-4 fill-none stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
@@ -520,10 +531,10 @@
               <span>Learn Details</span>
               <svg class="w-3.5 h-3.5 fill-none stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
             </button>
-            <button type="button" class="book-treatment-btn inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-white bg-teal-600 hover:bg-teal-700 shadow-sm transition-colors" data-treatment="Root Canal (RCT)">
+            <a href="#book-appointment" class="book-treatment-btn inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-white bg-teal-600 hover:bg-teal-700 shadow-sm transition-all duration-200 hover:scale-105" data-treatment="Root Canal (RCT)">
               <span>Book RCT</span>
               <svg class="w-3.5 h-3.5 fill-none stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-            </button>
+            </a>
           </div>
         </article>
 
@@ -554,10 +565,10 @@
               <span>Learn Details</span>
               <svg class="w-3.5 h-3.5 fill-none stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
             </button>
-            <button type="button" class="book-treatment-btn inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-white bg-teal-600 hover:bg-teal-700 shadow-sm transition-colors" data-treatment="Dental Implants">
+            <a href="#book-appointment" class="book-treatment-btn inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-white bg-teal-600 hover:bg-teal-700 shadow-sm transition-all duration-200 hover:scale-105" data-treatment="Dental Implants">
               <span>Book Implant</span>
               <svg class="w-3.5 h-3.5 fill-none stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-            </button>
+            </a>
           </div>
         </article>
 
@@ -588,10 +599,10 @@
               <span>Learn Details</span>
               <svg class="w-3.5 h-3.5 fill-none stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
             </button>
-            <button type="button" class="book-treatment-btn inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-white bg-teal-600 hover:bg-teal-700 shadow-sm transition-colors" data-treatment="Braces / Clear Aligners">
+            <a href="#book-appointment" class="book-treatment-btn inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-white bg-teal-600 hover:bg-teal-700 shadow-sm transition-all duration-200 hover:scale-105" data-treatment="Braces / Clear Aligners">
               <span>Book Aligners</span>
               <svg class="w-3.5 h-3.5 fill-none stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-            </button>
+            </a>
           </div>
         </article>
 
@@ -622,10 +633,10 @@
               <span>Learn Details</span>
               <svg class="w-3.5 h-3.5 fill-none stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
             </button>
-            <button type="button" class="book-treatment-btn inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-white bg-teal-600 hover:bg-teal-700 shadow-sm transition-colors" data-treatment="Routine Cleaning & Polishing">
+            <a href="#book-appointment" class="book-treatment-btn inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-white bg-teal-600 hover:bg-teal-700 shadow-sm transition-all duration-200 hover:scale-105" data-treatment="Laser Teeth Whitening">
               <span>Book Whitening</span>
               <svg class="w-3.5 h-3.5 fill-none stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-            </button>
+            </a>
           </div>
         </article>
 
@@ -656,10 +667,10 @@
               <span>Learn Details</span>
               <svg class="w-3.5 h-3.5 fill-none stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
             </button>
-            <button type="button" class="book-treatment-btn inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-white bg-teal-600 hover:bg-teal-700 shadow-sm transition-colors" data-treatment="Tooth Pain / Emergency">
+            <a href="#book-appointment" class="book-treatment-btn inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-white bg-teal-600 hover:bg-teal-700 shadow-sm transition-all duration-200 hover:scale-105" data-treatment="Wisdom Tooth Extraction">
               <span>Book Relief</span>
               <svg class="w-3.5 h-3.5 fill-none stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-            </button>
+            </a>
           </div>
         </article>
 
@@ -690,10 +701,10 @@
               <span>Learn Details</span>
               <svg class="w-3.5 h-3.5 fill-none stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
             </button>
-            <button type="button" class="book-treatment-btn inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-white bg-teal-600 hover:bg-teal-700 shadow-sm transition-colors" data-treatment="Kids Dentistry">
+            <a href="#book-appointment" class="book-treatment-btn inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-white bg-teal-600 hover:bg-teal-700 shadow-sm transition-all duration-200 hover:scale-105" data-treatment="Kids Dentistry">
               <span>Book Kids Care</span>
               <svg class="w-3.5 h-3.5 fill-none stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-            </button>
+            </a>
           </div>
         </article>
 
@@ -703,201 +714,7 @@
   </section>
 
 
-  <!-- =========================================================================
-       SECTION 6: TRUST, HYGIENE & TECHNOLOGY (BEFORE/AFTER SLIDER + PROTOCOLS)
-       ========================================================================= -->
-  <section id="hygiene-tech" class="py-16 md:py-24 bg-white relative">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <!-- Section Header -->
-      <div id="transformations" class="text-center max-w-3xl mx-auto mb-16">
-        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-teal-50 text-teal-700 border border-teal-200 mb-3">
-          <svg class="w-3.5 h-3.5 fill-none stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
-          Clinical Excellence
-        </span>
-        <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 mb-4">
-          Uncompromising Hygiene &amp; Smile Transformations
-        </h2>
-        <p class="text-base sm:text-lg text-slate-600">
-          Explore real patient results achieved using digital smile design, and see how our 4-step sterilization guarantees your complete safety.
-        </p>
-      </div>
 
-      <!-- Part 1: Interactive Before & After Slider Section -->
-      <div class="mb-20 bg-slate-50 rounded-3xl p-6 sm:p-10 border border-slate-200/80 shadow-lg">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          
-          <!-- Slider Control & Explanatory Left Column -->
-          <div class="lg:col-span-5 flex flex-col justify-between">
-            <div>
-              <div class="inline-flex p-1 bg-white rounded-xl border border-slate-200 shadow-sm mb-6 flex-wrap">
-                <button type="button" class="case-toggle-btn px-4 py-2 rounded-lg text-xs font-bold bg-teal-600 text-white shadow-md transition-all whitespace-nowrap" data-case="whitening">
-                  Case 1: Whitening &amp; Veneers
-                </button>
-                <button type="button" class="case-toggle-btn px-4 py-2 rounded-lg text-xs font-bold text-slate-700 hover:text-teal-600 transition-all whitespace-nowrap" data-case="aligners">
-                  Case 2: Clear Aligners
-                </button>
-              </div>
-
-              <h3 id="ba-case-title" class="text-2xl font-bold text-slate-900 mb-3">
-                Smile Whitening &amp; Porcelain Veneers
-              </h3>
-              
-              <p id="ba-case-desc" class="text-sm text-slate-600 leading-relaxed mb-6">
-                Patient experienced chronic tea/coffee stains &amp; chipped central incisors. Restored with laser whitening &amp; 6 hand-crafted ceramic veneers in 2 visits.
-              </p>
-
-              <div class="p-4 rounded-2xl bg-white border border-slate-200/80 mb-6">
-                <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">Clinical Outcome</p>
-                <p id="ba-case-stats" class="text-sm font-bold text-teal-700">
-                  8 Shades Brighter &bull; 0% Sensitivity &bull; 2 Sittings
-                </p>
-              </div>
-
-              <div class="flex items-center gap-2 text-xs text-slate-500">
-                <svg class="w-4 h-4 text-teal-600 shrink-0 fill-none stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-                <span>Drag the circular handle horizontally to compare Before vs. After results</span>
-              </div>
-            </div>
-
-            <div class="mt-8 pt-6 border-t border-slate-200 flex items-center justify-between">
-              <div>
-                <p class="text-xs text-slate-500">Want similar results?</p>
-                <p class="text-sm font-bold text-slate-800">Free Digital Smile Simulation</p>
-              </div>
-              <a href="#book-appointment" class="px-4 py-2 rounded-xl text-xs font-bold text-teal-700 bg-teal-50 border border-teal-200 hover:bg-teal-100 transition-colors whitespace-nowrap">
-                Book Consultation
-              </a>
-            </div>
-          </div>
-
-          <!-- Slider Widget Right Column -->
-          <div class="lg:col-span-7">
-            <div id="ba-slider" class="ba-container aspect-[4/3] sm:aspect-[16/10] bg-slate-900 shadow-xl relative overflow-hidden select-none">
-              
-              <!-- After Image (Background Layer) -->
-              <img id="ba-img-after" src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1000&q=80" alt="After smile transformation" class="ba-image-after" draggable="false">
-              
-              <!-- Tag: After -->
-              <div class="absolute top-4 right-4 z-10 px-3 py-1 rounded-full text-xs font-bold bg-teal-600 text-white shadow-md pointer-events-none">
-                AFTER
-              </div>
-
-              <!-- Before Image (Clipped via JavaScript inline styles) -->
-              <img id="ba-img-before" src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1000&q=80" alt="Before smile transformation" class="ba-image-before teeth-whitening-stained" draggable="false">
-              
-              <!-- Tag: Before (Clipped together with before image) -->
-              <div id="ba-before-tag-container" class="ba-before-tag-container">
-                <div class="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-bold bg-slate-900/85 text-white backdrop-blur shadow-md pointer-events-none">
-                  BEFORE
-                </div>
-              </div>
-
-              <!-- Divider Line -->
-              <div id="ba-divider" class="ba-divider"></div>
-
-              <!-- Draggable Handle with Inline Chevron Icons -->
-              <div id="ba-handle" class="ba-handle">
-                <svg class="w-5 h-5 text-white fill-none stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="11 17 6 12 11 7"/><polyline points="18 17 13 12 18 7"/></svg>
-              </div>
-
-              <!-- Transparent Range Input Overlay for 100% Reliable Cross-Device Sliding -->
-              <input type="range" min="0" max="100" value="50" id="ba-range-input" class="ba-range-input" aria-label="Before and after comparison slider">
-
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- Part 2: Painless & Safe Protocol (3 Feature Blocks) -->
-      <div class="text-center max-w-2xl mx-auto mb-10">
-        <h3 class="text-2xl font-bold text-slate-900">
-          Our 3 Pillars of Safe, Painless Dentistry
-        </h3>
-        <p class="text-sm text-slate-600 mt-1">
-          Setting the gold standard for clinical hygiene and patient comfort.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        
-        <!-- Feature Block 1: 4-Step Autoclave Sterilization -->
-        <div class="p-8 rounded-3xl bg-slate-50 border border-slate-200/80 shadow-sm hover:shadow-md transition-shadow">
-          <div class="w-14 h-14 rounded-2xl bg-teal-100 text-teal-700 flex items-center justify-center mb-6">
-            <svg class="w-7 h-7 fill-none stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-          </div>
-          <span class="text-xs font-extrabold uppercase tracking-wider text-teal-700 block mb-1">Infection Control</span>
-          <h4 class="text-xl font-bold text-slate-900 mb-3">
-            4-Step Autoclave Sterilization
-          </h4>
-          <p class="text-sm text-slate-600 leading-relaxed mb-4">
-            Ultrasonic scrub, medical Class-B vacuum sterilization at 134°C, UV germicidal storage, and pouches unsealed exclusively right in front of you.
-          </p>
-          <ul class="space-y-2 text-xs font-semibold text-slate-700">
-            <li class="flex items-center gap-2">
-              <svg class="w-4 h-4 text-teal-600 fill-none stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-              <span>Zero cross-contamination risk</span>
-            </li>
-            <li class="flex items-center gap-2">
-              <svg class="w-4 h-4 text-teal-600 fill-none stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-              <span>Hospital Grade Class-B Standards</span>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Feature Block 2: Digital Low-Radiation X-Rays -->
-        <div class="p-8 rounded-3xl bg-slate-50 border border-slate-200/80 shadow-sm hover:shadow-md transition-shadow">
-          <div class="w-14 h-14 rounded-2xl bg-teal-100 text-teal-700 flex items-center justify-center mb-6">
-            <svg class="w-7 h-7 fill-none stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><circle cx="12" cy="12" r="3"/></svg>
-          </div>
-          <span class="text-xs font-extrabold uppercase tracking-wider text-teal-700 block mb-1">Digital Diagnostics</span>
-          <h4 class="text-xl font-bold text-slate-900 mb-3">
-            Digital Low-Radiation Scanners
-          </h4>
-          <p class="text-sm text-slate-600 leading-relaxed mb-4">
-            Advanced intraoral 3D scanners replace uncomfortable gaggy putty impressions. High-resolution digital X-rays reduce patient radiation exposure by over 90%.
-          </p>
-          <ul class="space-y-2 text-xs font-semibold text-slate-700">
-            <li class="flex items-center gap-2">
-              <svg class="w-4 h-4 text-teal-600 fill-none stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-              <span>90% lower radiation vs film X-rays</span>
-            </li>
-            <li class="flex items-center gap-2">
-              <svg class="w-4 h-4 text-teal-600 fill-none stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-              <span>Sub-millimeter 3D accuracy</span>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Feature Block 3: Computer-Assisted Painless Anesthesia -->
-        <div class="p-8 rounded-3xl bg-slate-50 border border-slate-200/80 shadow-sm hover:shadow-md transition-shadow">
-          <div class="w-14 h-14 rounded-2xl bg-teal-100 text-teal-700 flex items-center justify-center mb-6">
-            <svg class="w-7 h-7 fill-none stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/><line x1="17.5" y1="15" x2="9" y2="15"/></svg>
-          </div>
-          <span class="text-xs font-extrabold uppercase tracking-wider text-teal-700 block mb-1">Anxiety-Free Comfort</span>
-          <h4 class="text-xl font-bold text-slate-900 mb-3">
-            Computer-Assisted Painless Anesthesia
-          </h4>
-          <p class="text-sm text-slate-600 leading-relaxed mb-4">
-            Micro-calibrated computerized anesthetic delivery system that eliminates the sharp stinging pressure of traditional needle injections. Smooth, soothing, and gentle.
-          </p>
-          <ul class="space-y-2 text-xs font-semibold text-slate-700">
-            <li class="flex items-center gap-2">
-              <svg class="w-4 h-4 text-teal-600 fill-none stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-              <span>No needle fear or painful pressure</span>
-            </li>
-            <li class="flex items-center gap-2">
-              <svg class="w-4 h-4 text-teal-600 fill-none stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-              <span>Targeted single-tooth numbness</span>
-            </li>
-          </ul>
-        </div>
-
-      </div>
-
-    </div>
-  </section>
 
 
   <!-- =========================================================================
@@ -1538,9 +1355,7 @@
         <div>
           <h4 class="text-xs font-bold text-white uppercase tracking-wider mb-4">Patient Care</h4>
           <ul class="space-y-2.5 text-xs">
-            <li><a href="#transformations" class="hover:text-teal-400 transition-colors">Smile Transformations</a></li>
             <li><a href="#about-doctor" class="hover:text-teal-400 transition-colors">About Dr. Aryan Sharma</a></li>
-            <li><a href="#hygiene-tech" class="hover:text-teal-400 transition-colors">Autoclave Sterilization</a></li>
             <li><a href="#reviews" class="hover:text-teal-400 transition-colors">Google Reviews (4.9/5)</a></li>
             <li><a href="#book-appointment" class="hover:text-teal-400 transition-colors">Book Online Appointment</a></li>
             <li><a href="#contact" class="hover:text-teal-400 transition-colors">Valet Parking &amp; Landmark</a></li>
@@ -1763,7 +1578,14 @@
     </div>
   </div>
 
-  <!-- Core JavaScript -->
+  <!-- Core JavaScript (Supports both folder and flat structure) -->
   <script src="js/app.js"></script>
+  <script>
+    if (typeof initMobileMenu === 'undefined') {
+      var s = document.createElement('script');
+      s.src = 'app.js';
+      document.body.appendChild(s);
+    }
+  </script>
 </body>
 </html>

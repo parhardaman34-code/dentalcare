@@ -36,12 +36,6 @@ A modern, responsive, high-converting landing page built for **Apex Smile Dental
    - *"Book Treatment"* button auto-selects the treatment in the booking form and smoothly scrolls to it.
    - *"Learn Details"* modal reveals procedure breakdown, anesthesia details, and estimated pricing.
 
-6. **Trust, Hygiene & Technology**
-   - **Interactive Before & After Image Comparison Slider**:
-     - 60 FPS hardware-accelerated CSS `clip-path` with pointer capture (Mouse, Touch, Stylus).
-     - Full keyboard accessibility (Arrow keys, Home, End).
-     - Case study toggles: *Smile Whitening & Porcelain Veneers* and *Clear Aligners Straightening*.
-   - **Painless & Safe Protocol**: 3 feature blocks highlighting 4-Step Autoclave Sterilization, Digital Low-Radiation Scanners, and Computer-Assisted Painless Anesthesia.
 
 7. **Meet the Chief Dentist**
    - Profile of **Dr. Aryan Sharma, BDS, MDS (Conservative Dentistry & Endodontics)**.

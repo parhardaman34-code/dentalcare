@@ -86,25 +86,65 @@ function initTreatmentCards() {
   const treatmentButtons = document.querySelectorAll('.book-treatment-btn');
   const treatmentSelect = document.getElementById('booking-treatment');
   const bookingSection = document.getElementById('book-appointment');
+  const nameInput = document.getElementById('booking-name');
+  const selectedBanner = document.getElementById('booking-selected-banner');
+  const selectedTreatmentName = document.getElementById('selected-treatment-name');
 
+  const scrollToBooking = (treatmentVal = null) => {
+    if (treatmentSelect && treatmentVal) {
+      treatmentSelect.value = treatmentVal;
+
+      // Update banner text and show banner
+      if (selectedTreatmentName) {
+        selectedTreatmentName.textContent = treatmentVal;
+      }
+      if (selectedBanner) {
+        selectedBanner.classList.remove('hidden');
+        selectedBanner.classList.add('flex');
+      }
+
+      // Trigger high-visibility highlight pulse on the select
+      treatmentSelect.classList.remove('ring-4', 'ring-teal-400', 'bg-teal-900');
+      void treatmentSelect.offsetWidth; // re-flow
+      treatmentSelect.classList.add('ring-4', 'ring-teal-400', 'bg-teal-900');
+      setTimeout(() => {
+        treatmentSelect.classList.remove('ring-4', 'ring-teal-400', 'bg-teal-900');
+      }, 2500);
+    }
+
+    if (bookingSection) {
+      // Offset scroll calculation so sticky navbar doesn't cover heading
+      const yOffset = -90;
+      const y = bookingSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+
+      // Auto-focus patient name input field
+      setTimeout(() => {
+        if (nameInput) {
+          nameInput.focus();
+        }
+      }, 550);
+    }
+  };
+
+  // Treatment Card Specific Buttons ("Book RCT", "Book Implant", etc.)
   treatmentButtons.forEach((button) => {
     button.addEventListener('click', (e) => {
       e.preventDefault();
       const treatmentValue = button.dataset.treatment;
-      
-      if (treatmentSelect && treatmentValue) {
-        treatmentSelect.value = treatmentValue;
-        // Trigger subtle highlight pulse on select
-        treatmentSelect.classList.add('ring-4', 'ring-teal-400', 'bg-teal-900');
-        setTimeout(() => {
-          treatmentSelect.classList.remove('ring-4', 'ring-teal-400', 'bg-teal-900');
-        }, 1500);
-      }
-
-      if (bookingSection) {
-        bookingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      scrollToBooking(treatmentValue);
     });
+  });
+
+  // Global "Book Appointment" Links (Navbar, Hero, Mobile, Footer)
+  const generalBookingCTAs = document.querySelectorAll('a[href="#book-appointment"]');
+  generalBookingCTAs.forEach((cta) => {
+    if (!cta.classList.contains('book-treatment-btn')) {
+      cta.addEventListener('click', (e) => {
+        e.preventDefault();
+        scrollToBooking(null);
+      });
+    }
   });
 }
 
@@ -445,22 +485,38 @@ function initTreatmentModal() {
         'rct': 'Root Canal (RCT)',
         'implants': 'Dental Implants',
         'aligners': 'Braces / Clear Aligners',
-        'whitening': 'Routine Cleaning & Polishing',
-        'wisdom': 'Tooth Pain / Emergency',
+        'whitening': 'Laser Teeth Whitening',
+        'wisdom': 'Wisdom Tooth Extraction',
         'pediatric': 'Kids Dentistry'
       };
 
       const selectVal = keyMap[currentTreatmentKey];
       const treatmentSelect = document.getElementById('booking-treatment');
+      const selectedBanner = document.getElementById('booking-selected-banner');
+      const selectedTreatmentName = document.getElementById('selected-treatment-name');
+      const nameInput = document.getElementById('booking-name');
+
       if (treatmentSelect && selectVal) {
         treatmentSelect.value = selectVal;
-        treatmentSelect.classList.add('ring-4', 'ring-teal-400');
-        setTimeout(() => treatmentSelect.classList.remove('ring-4', 'ring-teal-400'), 1500);
+        if (selectedTreatmentName) selectedTreatmentName.textContent = selectVal;
+        if (selectedBanner) {
+          selectedBanner.classList.remove('hidden');
+          selectedBanner.classList.add('flex');
+        }
+        treatmentSelect.classList.remove('ring-4', 'ring-teal-400', 'bg-teal-900');
+        void treatmentSelect.offsetWidth;
+        treatmentSelect.classList.add('ring-4', 'ring-teal-400', 'bg-teal-900');
+        setTimeout(() => treatmentSelect.classList.remove('ring-4', 'ring-teal-400', 'bg-teal-900'), 2500);
       }
 
       const bookingSection = document.getElementById('book-appointment');
       if (bookingSection) {
-        bookingSection.scrollIntoView({ behavior: 'smooth' });
+        const yOffset = -90;
+        const y = bookingSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+        setTimeout(() => {
+          if (nameInput) nameInput.focus();
+        }, 550);
       }
     });
   }
