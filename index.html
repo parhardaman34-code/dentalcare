@@ -773,33 +773,36 @@
 
           <!-- Slider Widget Right Column -->
           <div class="lg:col-span-7">
-            <div id="ba-slider" class="ba-container aspect-[4/3] sm:aspect-[16/10] bg-slate-900 shadow-xl cursor-ew-resize relative">
+            <div id="ba-slider" class="ba-container aspect-[4/3] sm:aspect-[16/10] bg-slate-900 shadow-xl relative overflow-hidden select-none">
               
               <!-- After Image (Background Layer) -->
-              <img id="ba-img-after" src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1000&q=80" alt="After smile transformation" class="ba-image-after">
+              <img id="ba-img-after" src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1000&q=80" alt="After smile transformation" class="ba-image-after" draggable="false">
               
               <!-- Tag: After -->
               <div class="absolute top-4 right-4 z-10 px-3 py-1 rounded-full text-xs font-bold bg-teal-600 text-white shadow-md pointer-events-none">
                 AFTER
               </div>
 
-              <!-- Before Image (Clipped via CSS clip-path) -->
-              <img id="ba-img-before" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1000&q=80" alt="Before smile transformation" class="ba-image-before">
+              <!-- Before Image (Clipped via JavaScript inline styles) -->
+              <img id="ba-img-before" src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1000&q=80" alt="Before smile transformation" class="ba-image-before teeth-whitening-stained" draggable="false">
               
               <!-- Tag: Before (Clipped together with before image) -->
-              <div class="ba-before-tag-container">
-                <div class="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-bold bg-slate-900/80 text-white backdrop-blur shadow-md pointer-events-none">
+              <div id="ba-before-tag-container" class="ba-before-tag-container">
+                <div class="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-bold bg-slate-900/85 text-white backdrop-blur shadow-md pointer-events-none">
                   BEFORE
                 </div>
               </div>
 
               <!-- Divider Line -->
-              <div class="ba-divider"></div>
+              <div id="ba-divider" class="ba-divider"></div>
 
               <!-- Draggable Handle with Inline Chevron Icons -->
               <div id="ba-handle" class="ba-handle">
                 <svg class="w-5 h-5 text-white fill-none stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="11 17 6 12 11 7"/><polyline points="18 17 13 12 18 7"/></svg>
               </div>
+
+              <!-- Transparent Range Input Overlay for 100% Reliable Cross-Device Sliding -->
+              <input type="range" min="0" max="100" value="50" id="ba-range-input" class="ba-range-input" aria-label="Before and after comparison slider">
 
             </div>
           </div>
