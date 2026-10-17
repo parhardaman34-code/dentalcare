@@ -1,6 +1,6 @@
 /**
  * Dr Charan Singh Dental & Implant Centre (Phagwara, Punjab)
- * LGBTQ+ Friendly Dental & Implant Practice
+ * Hospital-Grade Sterilization & Advanced Dental Care
  * Core Interactive Script
  */
 
@@ -27,6 +27,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 6. Treatment Details Modal
   initTreatmentModal();
+
+  // 7. Live Demo Customizer (Edit Name, Phone, Address on the Fly)
+  initDemoCustomizer();
 });
 
 /* ----------------------------------------------------
@@ -200,10 +203,12 @@ function initBookingForm() {
 
     // Configure WhatsApp Message Button
     if (whatsappSendBtn) {
+      const activeData = getCurrentClinicData();
+      const waNumber = formatWhatsAppNumber(activeData.phone);
       const waMessage = encodeURIComponent(
-        `Hello Dr Charan Singh Dental & Implant Centre! 👋\nI have requested an appointment:\n\n• Ref: ${refCode}\n• Patient: ${name}\n• Phone: ${phone}\n• Treatment: ${treatment}\n• Preferred Slot: ${formattedDate} (${shift})\n\nPlease confirm my appointment slot at Scheme No. 3, Phagwara!`
+        `Hello ${activeData.clinicName}! 👋\nI have requested an appointment:\n\n• Ref: ${refCode}\n• Patient: ${name}\n• Phone: ${phone}\n• Treatment: ${treatment}\n• Preferred Slot: ${formattedDate} (${shift})\n\nPlease confirm my appointment slot!`
       );
-      whatsappSendBtn.href = `https://wa.me/919915515559?text=${waMessage}`;
+      whatsappSendBtn.href = `https://wa.me/${waNumber}?text=${waMessage}`;
     }
 
     // Show Modal
@@ -518,3 +523,320 @@ function initTreatmentModal() {
     });
   }
 }
+
+/* ----------------------------------------------------
+ * 8. Live Demo Customizer (Edit Name, Phone, Address on the Fly)
+ * ---------------------------------------------------- */
+const DEFAULT_CLINIC_PRESET = {
+  clinicName: 'Dr Charan Singh Dental & Implant Centre',
+  doctorName: 'Dr. Charan Singh',
+  phone: '09915515559',
+  street: 'Scheme no 3, SCF-319',
+  landmark: 'Near S. Sudhir Sweets',
+  city: 'Phagwara, Punjab 144401',
+  cityNameOnly: 'Phagwara'
+};
+
+const DEMO_PRESETS = {
+  'dr-charan': DEFAULT_CLINIC_PRESET,
+  'country-dental': {
+    clinicName: 'Country Dental',
+    doctorName: 'Dr. Dirk F. Roosma, DMD',
+    phone: '+1 406-741-5031',
+    street: '25 Little Bitterroot Rd',
+    landmark: 'Hot Springs Valley',
+    city: 'Hot Springs, MT 59845, Montana',
+    cityNameOnly: 'Hot Springs, MT'
+  },
+  'apex-dental': {
+    clinicName: 'Apex Smile Dental Studio',
+    doctorName: 'Dr. Sameer Verma, BDS, MDS',
+    phone: '+91 98765 43210',
+    street: 'Civil Lines, Main Boulevard',
+    landmark: 'Opposite City Mall',
+    city: 'New Delhi, 110054',
+    cityNameOnly: 'New Delhi'
+  }
+};
+
+function getCurrentClinicData() {
+  try {
+    const saved = localStorage.getItem('custom_clinic_data');
+    if (saved) {
+      return { ...DEFAULT_CLINIC_PRESET, ...JSON.parse(saved) };
+    }
+  } catch (e) {
+    console.warn('Error reading from localStorage:', e);
+  }
+  return { ...DEFAULT_CLINIC_PRESET };
+}
+
+function formatWhatsAppNumber(phoneStr) {
+  if (!phoneStr) return '919915515559';
+  const clean = phoneStr.replace(/[^0-9]/g, '');
+  if (clean.length === 11 && clean.startsWith('0')) {
+    return '91' + clean.slice(1);
+  }
+  if (clean.length === 10) {
+    return '91' + clean;
+  }
+  return clean;
+}
+
+function applyClinicData(data, showToast = false) {
+  if (!data) return;
+
+  const clinicName = data.clinicName || DEFAULT_CLINIC_PRESET.clinicName;
+  const doctorName = data.doctorName || DEFAULT_CLINIC_PRESET.doctorName;
+  const phone = data.phone || DEFAULT_CLINIC_PRESET.phone;
+  const street = data.street || DEFAULT_CLINIC_PRESET.street;
+  const landmark = data.landmark || '';
+  const city = data.city || DEFAULT_CLINIC_PRESET.city;
+  const cityNameOnly = data.cityNameOnly || (city.includes(',') ? city.split(',')[0].trim() : city);
+
+  const cleanPhone = phone.replace(/[^0-9+]/g, '');
+  const waNumber = formatWhatsAppNumber(phone);
+
+  // 1. Update text content on all targeted tags
+  document.querySelectorAll('.clinic-name-val').forEach((el) => {
+    el.textContent = clinicName;
+  });
+  document.querySelectorAll('.doctor-name-val').forEach((el) => {
+    el.textContent = doctorName;
+  });
+  document.querySelectorAll('.clinic-phone-val').forEach((el) => {
+    el.textContent = phone;
+  });
+  document.querySelectorAll('.clinic-street-val').forEach((el) => {
+    el.textContent = street;
+  });
+  document.querySelectorAll('.clinic-landmark-val').forEach((el) => {
+    el.textContent = landmark;
+  });
+  document.querySelectorAll('.clinic-city-val').forEach((el) => {
+    el.textContent = city;
+  });
+  document.querySelectorAll('.clinic-city-name').forEach((el) => {
+    el.textContent = cityNameOnly;
+  });
+  document.querySelectorAll('.clinic-full-address-val').forEach((el) => {
+    el.textContent = `${street}, ${landmark ? landmark + ', ' : ''}${city}`;
+  });
+  document.querySelectorAll('.clinic-landmark-banner').forEach((el) => {
+    el.textContent = `Located near ${landmark || street} in ${city}`;
+  });
+
+  // 2. Update interactive telephone and WhatsApp links
+  document.querySelectorAll('.clinic-phone-link').forEach((link) => {
+    link.href = `tel:${cleanPhone}`;
+  });
+
+  document.querySelectorAll('.clinic-whatsapp-link').forEach((link) => {
+    const defaultMsg = encodeURIComponent(`Hi ${clinicName}! I would like to inquire about an appointment.`);
+    link.href = `https://wa.me/${waNumber}?text=${defaultMsg}`;
+  });
+
+  // 3. Update document title
+  document.title = `${clinicName} | ${cityNameOnly}`;
+
+  // 4. Update Google Maps iframe embed and directions link
+  const fullAddressQuery = `${street}, ${landmark ? landmark + ', ' : ''}${city}`;
+  const mapIframe = document.getElementById('clinic-google-map-iframe');
+  if (mapIframe) {
+    mapIframe.src = `https://maps.google.com/maps?q=${encodeURIComponent(fullAddressQuery)}&t=&z=16&ie=UTF8&iwloc=&output=embed`;
+    mapIframe.title = `${clinicName} Location Map`;
+  }
+  document.querySelectorAll('.clinic-directions-link').forEach((link) => {
+    link.href = `https://maps.google.com/?q=${encodeURIComponent(fullAddressQuery)}`;
+  });
+
+  // 5. Update booking form phone placeholder
+  const bookingPhone = document.getElementById('booking-phone');
+  if (bookingPhone) {
+    bookingPhone.placeholder = phone;
+  }
+
+  // 6. Save state in browser localStorage
+  try {
+    localStorage.setItem('custom_clinic_data', JSON.stringify({
+      clinicName,
+      doctorName,
+      phone,
+      street,
+      landmark,
+      city,
+      cityNameOnly
+    }));
+  } catch (e) {
+    console.warn('Error saving to localStorage:', e);
+  }
+
+  // 7. Toast feedback
+  if (showToast) {
+    showDemoToast(`Updated: ${clinicName}`);
+  }
+}
+
+function showDemoToast(msg) {
+  const toast = document.getElementById('demo-toast');
+  const toastMsg = document.getElementById('demo-toast-msg');
+  if (!toast || !toastMsg) return;
+
+  toastMsg.textContent = msg;
+  toast.classList.remove('hidden');
+  toast.classList.add('flex');
+
+  clearTimeout(window.__toastTimer);
+  window.__toastTimer = setTimeout(() => {
+    toast.classList.add('hidden');
+    toast.classList.remove('flex');
+  }, 2800);
+}
+
+function initDemoCustomizer() {
+  const triggerWrap = document.getElementById('demo-customizer-trigger-wrap');
+  const openBtn = document.getElementById('open-demo-customizer');
+  const footerOpenBtn = document.getElementById('footer-demo-trigger');
+  const modal = document.getElementById('demo-customizer-modal');
+  const closeBtn = document.getElementById('close-demo-customizer');
+  const form = document.getElementById('demo-customizer-form');
+  const resetBtn = document.getElementById('btn-reset-demo');
+  const presentationBtn = document.getElementById('btn-presentation-mode');
+
+  const presetDrCharan = document.getElementById('preset-dr-charan');
+  const presetCountryDental = document.getElementById('preset-country-dental');
+  const presetApexDental = document.getElementById('preset-apex-dental');
+
+  const inputClinic = document.getElementById('demo-input-clinic-name');
+  const inputDoctor = document.getElementById('demo-input-doctor-name');
+  const inputPhone = document.getElementById('demo-input-phone');
+  const inputStreet = document.getElementById('demo-input-street');
+  const inputLandmark = document.getElementById('demo-input-landmark');
+  const inputCity = document.getElementById('demo-input-city');
+
+  // Load and apply initial data immediately
+  const currentData = getCurrentClinicData();
+  applyClinicData(currentData, false);
+
+  // Check presentation mode
+  try {
+    const isPresentationMode = localStorage.getItem('presentation_mode') === 'true';
+    if (isPresentationMode && triggerWrap) {
+      triggerWrap.classList.add('hidden');
+    }
+  } catch (e) {}
+
+  const populateForm = (data) => {
+    if (inputClinic) inputClinic.value = data.clinicName || '';
+    if (inputDoctor) inputDoctor.value = data.doctorName || '';
+    if (inputPhone) inputPhone.value = data.phone || '';
+    if (inputStreet) inputStreet.value = data.street || '';
+    if (inputLandmark) inputLandmark.value = data.landmark || '';
+    if (inputCity) inputCity.value = data.city || '';
+  };
+
+  const openModal = () => {
+    if (!modal) return;
+    const activeData = getCurrentClinicData();
+    populateForm(activeData);
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+  };
+
+  const closeModal = () => {
+    if (!modal) return;
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+  };
+
+  if (openBtn) openBtn.addEventListener('click', openModal);
+  if (footerOpenBtn) footerOpenBtn.addEventListener('click', openModal);
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+  }
+
+  // Keyboard shortcut Ctrl + Shift + E or Cmd + Shift + E
+  document.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'E' || e.key === 'e')) {
+      e.preventDefault();
+      // Unhide trigger button if hidden
+      if (triggerWrap) triggerWrap.classList.remove('hidden');
+      try {
+        localStorage.removeItem('presentation_mode');
+      } catch (err) {}
+      if (modal && !modal.classList.contains('hidden')) {
+        closeModal();
+      } else {
+        openModal();
+      }
+    }
+  });
+
+  // Preset Handlers
+  if (presetDrCharan) {
+    presetDrCharan.addEventListener('click', () => {
+      populateForm(DEMO_PRESETS['dr-charan']);
+      applyClinicData(DEMO_PRESETS['dr-charan'], true);
+    });
+  }
+
+  if (presetCountryDental) {
+    presetCountryDental.addEventListener('click', () => {
+      populateForm(DEMO_PRESETS['country-dental']);
+      applyClinicData(DEMO_PRESETS['country-dental'], true);
+    });
+  }
+
+  if (presetApexDental) {
+    presetApexDental.addEventListener('click', () => {
+      populateForm(DEMO_PRESETS['apex-dental']);
+      applyClinicData(DEMO_PRESETS['apex-dental'], true);
+    });
+  }
+
+  // Reset Handler
+  if (resetBtn) {
+    resetBtn.addEventListener('click', () => {
+      try {
+        localStorage.removeItem('custom_clinic_data');
+      } catch (e) {}
+      populateForm(DEFAULT_CLINIC_PRESET);
+      applyClinicData(DEFAULT_CLINIC_PRESET, true);
+    });
+  }
+
+  // Presentation Mode Toggle
+  if (presentationBtn) {
+    presentationBtn.addEventListener('click', () => {
+      if (triggerWrap) triggerWrap.classList.add('hidden');
+      try {
+        localStorage.setItem('presentation_mode', 'true');
+      } catch (e) {}
+      closeModal();
+      showDemoToast('Presentation Mode: Trigger hidden. Press Ctrl+Shift+E to restore.');
+    });
+  }
+
+  // Form Submit Handler
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const updatedData = {
+        clinicName: inputClinic.value.trim(),
+        doctorName: inputDoctor.value.trim(),
+        phone: inputPhone.value.trim(),
+        street: inputStreet.value.trim(),
+        landmark: inputLandmark.value.trim(),
+        city: inputCity.value.trim()
+      };
+
+      applyClinicData(updatedData, true);
+      closeModal();
+    });
+  }
+}
+
