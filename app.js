@@ -4,7 +4,7 @@
  * Core Interactive Script
  */
 
-document.addEventListener('DOMContentLoaded', () => {
+function initApp() {
   // Initialize Lucide Icons
   if (typeof lucide !== 'undefined') {
     lucide.createIcons();
@@ -30,7 +30,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 7. Live Demo Customizer (Edit Name, Phone, Address on the Fly)
   initDemoCustomizer();
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initApp);
+} else {
+  initApp();
+}
 
 /* ----------------------------------------------------
  * 1. Mobile Menu Functionality
@@ -527,7 +533,7 @@ function initTreatmentModal() {
 /* ----------------------------------------------------
  * 8. Live Demo Customizer (Edit Name, Phone, Address on the Fly)
  * ---------------------------------------------------- */
-const DEFAULT_CLINIC_PRESET = {
+window.DEFAULT_CLINIC_PRESET = {
   clinicName: 'Dr Charan Singh Dental & Implant Centre',
   doctorName: 'Dr. Charan Singh',
   phone: '09915515559',
@@ -537,8 +543,8 @@ const DEFAULT_CLINIC_PRESET = {
   cityNameOnly: 'Phagwara'
 };
 
-const DEMO_PRESETS = {
-  'dr-charan': DEFAULT_CLINIC_PRESET,
+window.DEMO_PRESETS = {
+  'dr-charan': window.DEFAULT_CLINIC_PRESET,
   'country-dental': {
     clinicName: 'Country Dental',
     doctorName: 'Dr. Dirk F. Roosma, DMD',
@@ -559,21 +565,25 @@ const DEMO_PRESETS = {
   }
 };
 
-function getCurrentClinicData() {
+const DEFAULT_CLINIC_PRESET = window.DEFAULT_CLINIC_PRESET;
+const DEMO_PRESETS = window.DEMO_PRESETS;
+
+window.getCurrentClinicData = function() {
   try {
     const saved = localStorage.getItem('custom_clinic_data');
     if (saved) {
-      return { ...DEFAULT_CLINIC_PRESET, ...JSON.parse(saved) };
+      return { ...window.DEFAULT_CLINIC_PRESET, ...JSON.parse(saved) };
     }
   } catch (e) {
     console.warn('Error reading from localStorage:', e);
   }
-  return { ...DEFAULT_CLINIC_PRESET };
-}
+  return { ...window.DEFAULT_CLINIC_PRESET };
+};
+const getCurrentClinicData = window.getCurrentClinicData;
 
-function formatWhatsAppNumber(phoneStr) {
+window.formatWhatsAppNumber = function(phoneStr) {
   if (!phoneStr) return '919915515559';
-  const clean = phoneStr.replace(/[^0-9]/g, '');
+  const clean = String(phoneStr).replace(/[^0-9]/g, '');
   if (clean.length === 11 && clean.startsWith('0')) {
     return '91' + clean.slice(1);
   }
@@ -581,21 +591,41 @@ function formatWhatsAppNumber(phoneStr) {
     return '91' + clean;
   }
   return clean;
-}
+};
+const formatWhatsAppNumber = window.formatWhatsAppNumber;
 
-function applyClinicData(data, showToast = false) {
+window.showDemoToast = function(msg) {
+  const toast = document.getElementById('demo-toast');
+  const toastMsg = document.getElementById('demo-toast-msg');
+  if (!toast || !toastMsg) return;
+
+  toastMsg.textContent = msg;
+  toast.style.display = 'flex';
+  toast.classList.remove('hidden');
+  toast.classList.add('flex');
+
+  clearTimeout(window.__toastTimer);
+  window.__toastTimer = setTimeout(() => {
+    toast.style.display = 'none';
+    toast.classList.add('hidden');
+    toast.classList.remove('flex');
+  }, 3000);
+};
+const showDemoToast = window.showDemoToast;
+
+window.applyClinicData = function(data, showToast = false) {
   if (!data) return;
 
-  const clinicName = data.clinicName || DEFAULT_CLINIC_PRESET.clinicName;
-  const doctorName = data.doctorName || DEFAULT_CLINIC_PRESET.doctorName;
-  const phone = data.phone || DEFAULT_CLINIC_PRESET.phone;
-  const street = data.street || DEFAULT_CLINIC_PRESET.street;
+  const clinicName = data.clinicName || window.DEFAULT_CLINIC_PRESET.clinicName;
+  const doctorName = data.doctorName || window.DEFAULT_CLINIC_PRESET.doctorName;
+  const phone = data.phone || window.DEFAULT_CLINIC_PRESET.phone;
+  const street = data.street || window.DEFAULT_CLINIC_PRESET.street;
   const landmark = data.landmark || '';
-  const city = data.city || DEFAULT_CLINIC_PRESET.city;
+  const city = data.city || window.DEFAULT_CLINIC_PRESET.city;
   const cityNameOnly = data.cityNameOnly || (city.includes(',') ? city.split(',')[0].trim() : city);
 
-  const cleanPhone = phone.replace(/[^0-9+]/g, '');
-  const waNumber = formatWhatsAppNumber(phone);
+  const cleanPhone = String(phone).replace(/[^0-9+]/g, '');
+  const waNumber = window.formatWhatsAppNumber(phone);
 
   // 1. Update text content on all targeted tags
   document.querySelectorAll('.clinic-name-val').forEach((el) => {
@@ -673,25 +703,90 @@ function applyClinicData(data, showToast = false) {
 
   // 7. Toast feedback
   if (showToast) {
-    showDemoToast(`Updated: ${clinicName}`);
+    window.showDemoToast(`Live Demo Updated: ${clinicName}`);
   }
-}
+};
+const applyClinicData = window.applyClinicData;
 
-function showDemoToast(msg) {
-  const toast = document.getElementById('demo-toast');
-  const toastMsg = document.getElementById('demo-toast-msg');
-  if (!toast || !toastMsg) return;
+window.populateDemoForm = function(data) {
+  if (!data) return;
+  const inputClinic = document.getElementById('demo-input-clinic-name');
+  const inputDoctor = document.getElementById('demo-input-doctor-name');
+  const inputPhone = document.getElementById('demo-input-phone');
+  const inputStreet = document.getElementById('demo-input-street');
+  const inputLandmark = document.getElementById('demo-input-landmark');
+  const inputCity = document.getElementById('demo-input-city');
 
-  toastMsg.textContent = msg;
-  toast.classList.remove('hidden');
-  toast.classList.add('flex');
+  if (inputClinic) inputClinic.value = data.clinicName || '';
+  if (inputDoctor) inputDoctor.value = data.doctorName || '';
+  if (inputPhone) inputPhone.value = data.phone || '';
+  if (inputStreet) inputStreet.value = data.street || '';
+  if (inputLandmark) inputLandmark.value = data.landmark || '';
+  if (inputCity) inputCity.value = data.city || '';
+};
 
-  clearTimeout(window.__toastTimer);
-  window.__toastTimer = setTimeout(() => {
-    toast.classList.add('hidden');
-    toast.classList.remove('flex');
-  }, 2800);
-}
+window.openDemoCustomizerModal = function() {
+  const modal = document.getElementById('demo-customizer-modal');
+  if (!modal) return;
+  const activeData = window.getCurrentClinicData();
+  window.populateDemoForm(activeData);
+  modal.style.display = 'flex';
+  modal.classList.remove('hidden');
+  modal.classList.add('flex');
+};
+
+window.closeDemoCustomizerModal = function() {
+  const modal = document.getElementById('demo-customizer-modal');
+  if (!modal) return;
+  modal.style.display = 'none';
+  modal.classList.add('hidden');
+  modal.classList.remove('flex');
+};
+
+window.selectDemoPreset = function(presetKey) {
+  const preset = window.DEMO_PRESETS[presetKey];
+  if (!preset) return;
+  window.populateDemoForm(preset);
+  window.applyClinicData(preset, true);
+};
+
+window.resetDemoPreset = function() {
+  try {
+    localStorage.removeItem('custom_clinic_data');
+    localStorage.removeItem('presentation_mode');
+  } catch (e) {}
+  window.populateDemoForm(window.DEFAULT_CLINIC_PRESET);
+  window.applyClinicData(window.DEFAULT_CLINIC_PRESET, true);
+};
+
+window.togglePresentationMode = function() {
+  const triggerWrap = document.getElementById('demo-customizer-trigger-wrap');
+  if (triggerWrap) triggerWrap.style.display = 'none';
+  window.closeDemoCustomizerModal();
+  window.showDemoToast('Presentation Mode: Floating trigger hidden. Press Ctrl+Shift+E or use Navbar to restore.');
+};
+
+window.submitDemoForm = function(e) {
+  if (e && e.preventDefault) e.preventDefault();
+  const inputClinic = document.getElementById('demo-input-clinic-name');
+  const inputDoctor = document.getElementById('demo-input-doctor-name');
+  const inputPhone = document.getElementById('demo-input-phone');
+  const inputStreet = document.getElementById('demo-input-street');
+  const inputLandmark = document.getElementById('demo-input-landmark');
+  const inputCity = document.getElementById('demo-input-city');
+
+  const updatedData = {
+    clinicName: inputClinic ? inputClinic.value.trim() : '',
+    doctorName: inputDoctor ? inputDoctor.value.trim() : '',
+    phone: inputPhone ? inputPhone.value.trim() : '',
+    street: inputStreet ? inputStreet.value.trim() : '',
+    landmark: inputLandmark ? inputLandmark.value.trim() : '',
+    city: inputCity ? inputCity.value.trim() : ''
+  };
+
+  window.applyClinicData(updatedData, true);
+  window.closeDemoCustomizerModal();
+};
 
 function initDemoCustomizer() {
   const triggerWrap = document.getElementById('demo-customizer-trigger-wrap');
@@ -707,55 +802,29 @@ function initDemoCustomizer() {
   const presetCountryDental = document.getElementById('preset-country-dental');
   const presetApexDental = document.getElementById('preset-apex-dental');
 
-  const inputClinic = document.getElementById('demo-input-clinic-name');
-  const inputDoctor = document.getElementById('demo-input-doctor-name');
-  const inputPhone = document.getElementById('demo-input-phone');
-  const inputStreet = document.getElementById('demo-input-street');
-  const inputLandmark = document.getElementById('demo-input-landmark');
-  const inputCity = document.getElementById('demo-input-city');
-
   // Load and apply initial data immediately
-  const currentData = getCurrentClinicData();
-  applyClinicData(currentData, false);
+  const currentData = window.getCurrentClinicData();
+  window.applyClinicData(currentData, false);
 
-  // Check presentation mode
-  try {
-    const isPresentationMode = localStorage.getItem('presentation_mode') === 'true';
-    if (isPresentationMode && triggerWrap) {
-      triggerWrap.classList.add('hidden');
-    }
-  } catch (e) {}
+  // Always keep triggerWrap accessible
+  if (triggerWrap) {
+    triggerWrap.style.display = 'block';
+    triggerWrap.classList.remove('hidden');
+  }
 
-  const populateForm = (data) => {
-    if (inputClinic) inputClinic.value = data.clinicName || '';
-    if (inputDoctor) inputDoctor.value = data.doctorName || '';
-    if (inputPhone) inputPhone.value = data.phone || '';
-    if (inputStreet) inputStreet.value = data.street || '';
-    if (inputLandmark) inputLandmark.value = data.landmark || '';
-    if (inputCity) inputCity.value = data.city || '';
-  };
-
-  const openModal = () => {
-    if (!modal) return;
-    const activeData = getCurrentClinicData();
-    populateForm(activeData);
-    modal.classList.remove('hidden');
-    modal.classList.add('flex');
-  };
-
-  const closeModal = () => {
-    if (!modal) return;
-    modal.classList.add('hidden');
-    modal.classList.remove('flex');
-  };
-
-  if (openBtn) openBtn.addEventListener('click', openModal);
-  if (footerOpenBtn) footerOpenBtn.addEventListener('click', openModal);
-  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+  if (openBtn) {
+    openBtn.onclick = function() { window.openDemoCustomizerModal(); };
+  }
+  if (footerOpenBtn) {
+    footerOpenBtn.onclick = function() { window.openDemoCustomizerModal(); };
+  }
+  if (closeBtn) {
+    closeBtn.onclick = function() { window.closeDemoCustomizerModal(); };
+  }
 
   if (modal) {
     modal.addEventListener('click', (e) => {
-      if (e.target === modal) closeModal();
+      if (e.target === modal) window.closeDemoCustomizerModal();
     });
   }
 
@@ -763,80 +832,49 @@ function initDemoCustomizer() {
   document.addEventListener('keydown', (e) => {
     if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'E' || e.key === 'e')) {
       e.preventDefault();
-      // Unhide trigger button if hidden
-      if (triggerWrap) triggerWrap.classList.remove('hidden');
+      if (triggerWrap) {
+        triggerWrap.style.display = 'block';
+        triggerWrap.classList.remove('hidden');
+      }
       try {
         localStorage.removeItem('presentation_mode');
       } catch (err) {}
-      if (modal && !modal.classList.contains('hidden')) {
-        closeModal();
+      if (modal && modal.style.display === 'flex') {
+        window.closeDemoCustomizerModal();
       } else {
-        openModal();
+        window.openDemoCustomizerModal();
       }
+    }
+    if (e.key === 'Escape') {
+      window.closeDemoCustomizerModal();
     }
   });
 
   // Preset Handlers
   if (presetDrCharan) {
-    presetDrCharan.addEventListener('click', () => {
-      populateForm(DEMO_PRESETS['dr-charan']);
-      applyClinicData(DEMO_PRESETS['dr-charan'], true);
-    });
+    presetDrCharan.onclick = function() { window.selectDemoPreset('dr-charan'); };
   }
-
   if (presetCountryDental) {
-    presetCountryDental.addEventListener('click', () => {
-      populateForm(DEMO_PRESETS['country-dental']);
-      applyClinicData(DEMO_PRESETS['country-dental'], true);
-    });
+    presetCountryDental.onclick = function() { window.selectDemoPreset('country-dental'); };
   }
-
   if (presetApexDental) {
-    presetApexDental.addEventListener('click', () => {
-      populateForm(DEMO_PRESETS['apex-dental']);
-      applyClinicData(DEMO_PRESETS['apex-dental'], true);
-    });
+    presetApexDental.onclick = function() { window.selectDemoPreset('apex-dental'); };
   }
 
   // Reset Handler
   if (resetBtn) {
-    resetBtn.addEventListener('click', () => {
-      try {
-        localStorage.removeItem('custom_clinic_data');
-      } catch (e) {}
-      populateForm(DEFAULT_CLINIC_PRESET);
-      applyClinicData(DEFAULT_CLINIC_PRESET, true);
-    });
+    resetBtn.onclick = function() { window.resetDemoPreset(); };
   }
 
   // Presentation Mode Toggle
   if (presentationBtn) {
-    presentationBtn.addEventListener('click', () => {
-      if (triggerWrap) triggerWrap.classList.add('hidden');
-      try {
-        localStorage.setItem('presentation_mode', 'true');
-      } catch (e) {}
-      closeModal();
-      showDemoToast('Presentation Mode: Trigger hidden. Press Ctrl+Shift+E to restore.');
-    });
+    presentationBtn.onclick = function() { window.togglePresentationMode(); };
   }
 
   // Form Submit Handler
   if (form) {
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const updatedData = {
-        clinicName: inputClinic.value.trim(),
-        doctorName: inputDoctor.value.trim(),
-        phone: inputPhone.value.trim(),
-        street: inputStreet.value.trim(),
-        landmark: inputLandmark.value.trim(),
-        city: inputCity.value.trim()
-      };
-
-      applyClinicData(updatedData, true);
-      closeModal();
-    });
+    form.onsubmit = function(e) { window.submitDemoForm(e); };
   }
 }
+
 

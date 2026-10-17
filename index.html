@@ -120,7 +120,13 @@
         </nav>
 
         <!-- Right Action CTAs -->
-        <div class="hidden sm:flex items-center gap-3 shrink-0">
+        <div class="hidden sm:flex items-center gap-2.5 shrink-0">
+          <!-- Demo Customizer Quick Button in Navbar -->
+          <button type="button" onclick="window.openDemoCustomizerModal && window.openDemoCustomizerModal()" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold text-amber-900 bg-amber-50 hover:bg-amber-100 border border-amber-300/80 transition-all hover:scale-105 active:scale-95 shadow-sm whitespace-nowrap cursor-pointer" title="Edit Clinic Info (Live Demo Customizer)">
+            <svg class="w-3.5 h-3.5 text-amber-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            <span>⚙️ Edit Demo</span>
+          </button>
+
           <!-- Dental Emergency Button -->
           <a href="tel:+919915515559" class="clinic-phone-link inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-bold text-white bg-rose-600 hover:bg-rose-700 shadow-md shadow-rose-600/20 hover:shadow-lg hover:shadow-rose-600/30 transition-all duration-200 whitespace-nowrap">
             <span class="relative flex h-2 w-2">
@@ -138,8 +144,11 @@
           </a>
         </div>
 
-        <!-- Mobile Menu Hamburger Button -->
+        <!-- Mobile Menu Controls -->
         <div class="flex items-center gap-2 lg:hidden">
+          <button type="button" onclick="window.openDemoCustomizerModal && window.openDemoCustomizerModal()" class="px-2.5 py-1.5 rounded-xl text-xs font-bold text-amber-900 bg-amber-50 border border-amber-300 flex items-center gap-1 shadow-sm">
+            <span>⚙️ Edit</span>
+          </button>
           <a href="tel:+919915515559" class="clinic-phone-link sm:hidden p-2 rounded-xl text-rose-600 bg-rose-50 border border-rose-200" title="Call Clinic">
             <svg class="w-4 h-4 fill-none stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           </a>
@@ -176,6 +185,10 @@
           <a href="tel:+919915515559" class="w-full py-3 px-4 rounded-xl text-center text-sm font-bold text-rose-600 bg-rose-50 border border-rose-200">
             Call Clinic: +91 99155 15559
           </a>
+          <button type="button" onclick="window.openDemoCustomizerModal && window.openDemoCustomizerModal(); document.getElementById('mobile-menu').classList.add('hidden'); document.body.style.overflow='';" class="w-full py-2.5 px-4 rounded-xl text-center text-xs font-bold text-amber-900 bg-amber-50 hover:bg-amber-100 border border-amber-300 flex items-center justify-center gap-2 shadow-sm cursor-pointer">
+            <svg class="w-4 h-4 text-amber-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            <span>⚙️ Edit Clinic Info (Demo Customizer)</span>
+          </button>
         </div>
       </div>
     </div>
@@ -259,9 +272,9 @@
               <svg class="w-4 h-4 fill-none stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </a>
 
-            <a href="tel:+919915515559" class="inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-2xl text-base font-bold text-slate-800 bg-white hover:bg-slate-50 border border-slate-200 shadow-sm hover:shadow transition-all duration-200 whitespace-nowrap">
+            <a href="tel:+919915515559" class="clinic-phone-link inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-2xl text-base font-bold text-slate-800 bg-white hover:bg-slate-50 border border-slate-200 shadow-sm hover:shadow transition-all duration-200 whitespace-nowrap">
               <svg class="w-5 h-5 text-teal-600 fill-none stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-              <span>Call: +91 99155 15559</span>
+              <span>Call: <span class="clinic-phone-val">+91 99155 15559</span></span>
             </a>
           </div>
 
@@ -272,7 +285,7 @@
               <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=120&q=80" alt="Patient">
               <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=120&q=80" alt="Patient">
             </div>
-            <span>Clinical care led by <strong>Dr. Charan Singh</strong> &bull; Scheme No. 3, Phagwara &bull; Welcoming all patients</span>
+            <span>Clinical care led by <strong class="doctor-name-val">Dr. Charan Singh</strong> &bull; <span class="clinic-street-val">Scheme No. 3</span>, <span class="clinic-city-name">Phagwara</span> &bull; Welcoming all patients</span>
           </div>
 
         </div>
@@ -291,7 +304,7 @@
               <!-- Sleek Operatory Tag inside image (Bottom Left) -->
               <div class="absolute bottom-4 left-4 z-10 px-3 py-1.5 rounded-xl bg-slate-900/80 backdrop-blur-md text-white text-[11px] font-semibold border border-white/10 flex items-center gap-2">
                 <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                <span>Dr Charan Singh Dental &bull; Phagwara</span>
+                <span><span class="clinic-name-val">Dr Charan Singh Dental &amp; Implant Centre</span> &bull; <span class="clinic-city-name">Phagwara</span></span>
               </div>
             </div>
 
@@ -1392,7 +1405,7 @@
             <svg class="w-3.5 h-3.5 fill-none stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
             Hospital-Grade Sterilization
           </span>
-          <button id="footer-demo-trigger" type="button" class="text-slate-400 hover:text-teal-300 transition-colors inline-flex items-center gap-1 text-[11px] font-medium" title="Edit Clinic Info (Ctrl + Shift + E)">
+          <button id="footer-demo-trigger" onclick="window.openDemoCustomizerModal && window.openDemoCustomizerModal()" type="button" class="text-slate-400 hover:text-teal-300 transition-colors inline-flex items-center gap-1 text-[11px] font-medium cursor-pointer" title="Edit Clinic Info (Ctrl + Shift + E)">
             <svg class="w-3.5 h-3.5 text-teal-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
             <span>Edit Info</span>
           </button>
@@ -1587,8 +1600,8 @@
   <!-- =========================================================================
        FLOATING DEMO CUSTOMIZER TRIGGER (BOTTOM-LEFT)
        ========================================================================= -->
-  <div id="demo-customizer-trigger-wrap" class="fixed bottom-20 md:bottom-8 left-4 md:left-8 z-40">
-    <button id="open-demo-customizer" type="button" class="group flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-slate-900/95 hover:bg-slate-900 text-white shadow-2xl border border-teal-500/40 hover:border-teal-400 backdrop-blur-md transition-all duration-200 hover:scale-105 active:scale-95 ring-2 ring-teal-500/20" aria-label="Edit Clinic Details for Demo">
+  <div id="demo-customizer-trigger-wrap" class="fixed bottom-20 md:bottom-8 left-4 md:left-8 z-50">
+    <button id="open-demo-customizer" onclick="window.openDemoCustomizerModal()" type="button" class="group flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-slate-900 text-white shadow-2xl border-2 border-teal-400 hover:border-teal-300 backdrop-blur-md transition-all duration-200 hover:scale-105 active:scale-95 ring-4 ring-teal-500/20 cursor-pointer" aria-label="Edit Clinic Details for Demo">
       <span class="relative flex h-3 w-3">
         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
         <span class="relative inline-flex rounded-full h-3 w-3 bg-teal-400"></span>
@@ -1606,11 +1619,11 @@
   <!-- =========================================================================
        MODAL 3: DEMO CUSTOMIZER MODAL (EDIT CLINIC INFO ON THE FLY)
        ========================================================================= -->
-  <div id="demo-customizer-modal" class="hidden fixed inset-0 z-50 items-center justify-center p-3 sm:p-5 bg-slate-950/80 backdrop-blur-sm overflow-y-auto">
-    <div class="bg-white rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl border border-slate-100 relative my-auto animate-in fade-in zoom-in-95 duration-200 max-h-[95vh] overflow-y-auto">
+  <div id="demo-customizer-modal" style="display: none;" class="fixed inset-0 z-[100] items-center justify-center p-3 sm:p-5 bg-slate-950/80 backdrop-blur-sm overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl border border-slate-200 relative my-auto max-h-[92vh] overflow-y-auto" onclick="event.stopPropagation()">
       
       <!-- Close Button -->
-      <button id="close-demo-customizer" type="button" class="absolute top-5 right-5 p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors" aria-label="Close customizer">
+      <button id="close-demo-customizer" onclick="window.closeDemoCustomizerModal()" type="button" class="absolute top-5 right-5 p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer" aria-label="Close customizer">
         <svg class="w-5 h-5 fill-none stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
 
@@ -1637,20 +1650,20 @@
           ⚡ 1-Click Presets:
         </p>
         <div class="flex flex-wrap gap-2">
-          <button type="button" id="preset-dr-charan" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-white text-slate-800 border border-slate-200 hover:border-teal-400 hover:bg-teal-50 transition-colors flex items-center gap-1.5 shadow-sm">
+          <button type="button" id="preset-dr-charan" onclick="window.selectDemoPreset('dr-charan')" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-white text-slate-800 border border-slate-200 hover:border-teal-400 hover:bg-teal-50 transition-colors flex items-center gap-1.5 shadow-sm cursor-pointer">
             <span>📍 Dr Charan Singh (Phagwara)</span>
           </button>
-          <button type="button" id="preset-country-dental" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-white text-slate-800 border border-slate-200 hover:border-teal-400 hover:bg-teal-50 transition-colors flex items-center gap-1.5 shadow-sm">
+          <button type="button" id="preset-country-dental" onclick="window.selectDemoPreset('country-dental')" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-white text-slate-800 border border-slate-200 hover:border-teal-400 hover:bg-teal-50 transition-colors flex items-center gap-1.5 shadow-sm cursor-pointer">
             <span>🇺🇸 Country Dental (Montana)</span>
           </button>
-          <button type="button" id="preset-apex-dental" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-white text-slate-800 border border-slate-200 hover:border-teal-400 hover:bg-teal-50 transition-colors flex items-center gap-1.5 shadow-sm">
+          <button type="button" id="preset-apex-dental" onclick="window.selectDemoPreset('apex-dental')" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-white text-slate-800 border border-slate-200 hover:border-teal-400 hover:bg-teal-50 transition-colors flex items-center gap-1.5 shadow-sm cursor-pointer">
             <span>✨ Apex Smile Studio</span>
           </button>
         </div>
       </div>
 
       <!-- Edit Form -->
-      <form id="demo-customizer-form" class="space-y-4">
+      <form id="demo-customizer-form" onsubmit="window.submitDemoForm(event)" class="space-y-4">
         
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
           <!-- Clinic / Practice Name -->
@@ -1705,15 +1718,15 @@
         <!-- Action Buttons -->
         <div class="pt-4 border-t border-slate-100 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
           <div class="flex items-center gap-2">
-            <button type="submit" class="flex-1 sm:flex-none px-6 py-3 rounded-xl font-bold text-xs sm:text-sm text-white bg-teal-600 hover:bg-teal-700 shadow-md shadow-teal-600/30 transition-all">
+            <button type="submit" class="flex-1 sm:flex-none px-6 py-3 rounded-xl font-bold text-xs sm:text-sm text-white bg-teal-600 hover:bg-teal-700 shadow-md shadow-teal-600/30 transition-all cursor-pointer">
               Save &amp; Apply Live
             </button>
-            <button type="button" id="btn-reset-demo" class="px-3.5 py-3 rounded-xl font-bold text-xs text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
+            <button type="button" id="btn-reset-demo" onclick="window.resetDemoPreset()" class="px-3.5 py-3 rounded-xl font-bold text-xs text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors cursor-pointer">
               Reset
             </button>
           </div>
 
-          <button type="button" id="btn-presentation-mode" class="text-xs font-bold text-slate-600 hover:text-teal-700 flex items-center justify-center gap-1.5 py-1 transition-colors">
+          <button type="button" id="btn-presentation-mode" onclick="window.togglePresentationMode()" class="text-xs font-bold text-slate-600 hover:text-teal-700 flex items-center justify-center gap-1.5 py-1 transition-colors cursor-pointer">
             <svg class="w-3.5 h-3.5 text-teal-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
             <span>Hide Trigger for Demo</span>
           </button>
@@ -1725,10 +1738,245 @@
   </div>
 
   <!-- Toast Notification for Live Update -->
-  <div id="demo-toast" class="hidden fixed top-6 right-6 z-50 items-center gap-2 px-4 py-3 rounded-2xl bg-slate-900 text-white text-xs font-bold shadow-2xl border border-teal-500/40 transition-all animate-in fade-in slide-in-from-top-4 duration-200">
+  <div id="demo-toast" style="display: none;" class="fixed top-6 right-6 z-[110] items-center gap-2 px-4 py-3 rounded-2xl bg-slate-900 text-white text-xs font-bold shadow-2xl border border-teal-500/40 transition-all">
     <span class="w-2.5 h-2.5 rounded-full bg-teal-400"></span>
     <span id="demo-toast-msg">Clinic details updated live!</span>
   </div>
+
+  <!-- Standalone Failsafe Demo Engine -->
+  <script>
+    window.DEFAULT_CLINIC_PRESET = {
+      clinicName: 'Dr Charan Singh Dental & Implant Centre',
+      doctorName: 'Dr. Charan Singh',
+      phone: '09915515559',
+      street: 'Scheme no 3, SCF-319',
+      landmark: 'Near S. Sudhir Sweets',
+      city: 'Phagwara, Punjab 144401',
+      cityNameOnly: 'Phagwara'
+    };
+
+    window.DEMO_PRESETS = {
+      'dr-charan': window.DEFAULT_CLINIC_PRESET,
+      'country-dental': {
+        clinicName: 'Country Dental',
+        doctorName: 'Dr. Dirk F. Roosma, DMD',
+        phone: '+1 406-741-5031',
+        street: '25 Little Bitterroot Rd',
+        landmark: 'Hot Springs Valley',
+        city: 'Hot Springs, MT 59845, Montana',
+        cityNameOnly: 'Hot Springs, MT'
+      },
+      'apex-dental': {
+        clinicName: 'Apex Smile Dental Studio',
+        doctorName: 'Dr. Sameer Verma, BDS, MDS',
+        phone: '+91 98765 43210',
+        street: 'Civil Lines, Main Boulevard',
+        landmark: 'Opposite City Mall',
+        city: 'New Delhi, 110054',
+        cityNameOnly: 'New Delhi'
+      }
+    };
+
+    window.getCurrentClinicData = function() {
+      try {
+        const saved = localStorage.getItem('custom_clinic_data');
+        if (saved) return { ...window.DEFAULT_CLINIC_PRESET, ...JSON.parse(saved) };
+      } catch (e) {}
+      return { ...window.DEFAULT_CLINIC_PRESET };
+    };
+
+    window.formatWhatsAppNumber = function(phoneStr) {
+      if (!phoneStr) return '919915515559';
+      const clean = String(phoneStr).replace(/[^0-9]/g, '');
+      if (clean.length === 11 && clean.startsWith('0')) return '91' + clean.slice(1);
+      if (clean.length === 10) return '91' + clean;
+      return clean;
+    };
+
+    window.showDemoToast = function(msg) {
+      const toast = document.getElementById('demo-toast');
+      const toastMsg = document.getElementById('demo-toast-msg');
+      if (!toast || !toastMsg) return;
+      toastMsg.textContent = msg;
+      toast.style.display = 'flex';
+      toast.classList.remove('hidden');
+      toast.classList.add('flex');
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(() => {
+        toast.style.display = 'none';
+        toast.classList.add('hidden');
+        toast.classList.remove('flex');
+      }, 3000);
+    };
+
+    window.applyClinicData = function(data, showToast) {
+      if (!data) return;
+      const clinicName = data.clinicName || window.DEFAULT_CLINIC_PRESET.clinicName;
+      const doctorName = data.doctorName || window.DEFAULT_CLINIC_PRESET.doctorName;
+      const phone = data.phone || window.DEFAULT_CLINIC_PRESET.phone;
+      const street = data.street || window.DEFAULT_CLINIC_PRESET.street;
+      const landmark = data.landmark || '';
+      const city = data.city || window.DEFAULT_CLINIC_PRESET.city;
+      const cityNameOnly = data.cityNameOnly || (city.includes(',') ? city.split(',')[0].trim() : city);
+
+      const cleanPhone = String(phone).replace(/[^0-9+]/g, '');
+      const waNumber = window.formatWhatsAppNumber(phone);
+
+      // Text elements
+      document.querySelectorAll('.clinic-name-val').forEach(el => el.textContent = clinicName);
+      document.querySelectorAll('.doctor-name-val').forEach(el => el.textContent = doctorName);
+      document.querySelectorAll('.clinic-phone-val').forEach(el => el.textContent = phone);
+      document.querySelectorAll('.clinic-street-val').forEach(el => el.textContent = street);
+      document.querySelectorAll('.clinic-landmark-val').forEach(el => el.textContent = landmark);
+      document.querySelectorAll('.clinic-city-val').forEach(el => el.textContent = city);
+      document.querySelectorAll('.clinic-city-name').forEach(el => el.textContent = cityNameOnly);
+      document.querySelectorAll('.clinic-full-address-val').forEach(el => el.textContent = `${street}, ${landmark ? landmark + ', ' : ''}${city}`);
+      document.querySelectorAll('.clinic-landmark-banner').forEach(el => el.textContent = `Located near ${landmark || street} in ${city}`);
+
+      // Links
+      document.querySelectorAll('.clinic-phone-link').forEach(link => link.href = `tel:${cleanPhone}`);
+      document.querySelectorAll('.clinic-whatsapp-link').forEach(link => {
+        link.href = `https://wa.me/${waNumber}?text=${encodeURIComponent('Hi ' + clinicName + '! I would like to inquire about an appointment.')}`;
+      });
+
+      // Document title
+      document.title = `${clinicName} | ${cityNameOnly}`;
+
+      // Map Iframe & Directions
+      const fullQuery = `${street}, ${landmark ? landmark + ', ' : ''}${city}`;
+      const mapIframe = document.getElementById('clinic-google-map-iframe');
+      if (mapIframe) {
+        mapIframe.src = `https://maps.google.com/maps?q=${encodeURIComponent(fullQuery)}&t=&z=16&ie=UTF8&iwloc=&output=embed`;
+        mapIframe.title = `${clinicName} Location Map`;
+      }
+      document.querySelectorAll('.clinic-directions-link').forEach(link => {
+        link.href = `https://maps.google.com/?q=${encodeURIComponent(fullQuery)}`;
+      });
+
+      // Booking placeholder
+      const bookingPhone = document.getElementById('booking-phone');
+      if (bookingPhone) bookingPhone.placeholder = phone;
+
+      // Save
+      try {
+        localStorage.setItem('custom_clinic_data', JSON.stringify({
+          clinicName, doctorName, phone, street, landmark, city, cityNameOnly
+        }));
+      } catch (e) {}
+
+      if (showToast) {
+        window.showDemoToast(`Live Demo Updated: ${clinicName}`);
+      }
+    };
+
+    window.populateDemoForm = function(data) {
+      const inputClinic = document.getElementById('demo-input-clinic-name');
+      const inputDoctor = document.getElementById('demo-input-doctor-name');
+      const inputPhone = document.getElementById('demo-input-phone');
+      const inputStreet = document.getElementById('demo-input-street');
+      const inputLandmark = document.getElementById('demo-input-landmark');
+      const inputCity = document.getElementById('demo-input-city');
+
+      if (inputClinic) inputClinic.value = data.clinicName || '';
+      if (inputDoctor) inputDoctor.value = data.doctorName || '';
+      if (inputPhone) inputPhone.value = data.phone || '';
+      if (inputStreet) inputStreet.value = data.street || '';
+      if (inputLandmark) inputLandmark.value = data.landmark || '';
+      if (inputCity) inputCity.value = data.city || '';
+    };
+
+    window.openDemoCustomizerModal = function() {
+      const modal = document.getElementById('demo-customizer-modal');
+      if (!modal) return;
+      const data = window.getCurrentClinicData();
+      window.populateDemoForm(data);
+      modal.style.display = 'flex';
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    };
+
+    window.closeDemoCustomizerModal = function() {
+      const modal = document.getElementById('demo-customizer-modal');
+      if (!modal) return;
+      modal.style.display = 'none';
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    };
+
+    window.selectDemoPreset = function(presetKey) {
+      const preset = window.DEMO_PRESETS[presetKey];
+      if (!preset) return;
+      window.populateDemoForm(preset);
+      window.applyClinicData(preset, true);
+    };
+
+    window.resetDemoPreset = function() {
+      try { localStorage.removeItem('custom_clinic_data'); } catch (e) {}
+      window.populateDemoForm(window.DEFAULT_CLINIC_PRESET);
+      window.applyClinicData(window.DEFAULT_CLINIC_PRESET, true);
+    };
+
+    window.togglePresentationMode = function() {
+      const triggerWrap = document.getElementById('demo-customizer-trigger-wrap');
+      if (triggerWrap) triggerWrap.style.display = 'none';
+      window.closeDemoCustomizerModal();
+      window.showDemoToast('Presentation Mode: Trigger hidden. Press Ctrl+Shift+E to restore.');
+    };
+
+    window.submitDemoForm = function(e) {
+      if (e) e.preventDefault();
+      const inputClinic = document.getElementById('demo-input-clinic-name');
+      const inputDoctor = document.getElementById('demo-input-doctor-name');
+      const inputPhone = document.getElementById('demo-input-phone');
+      const inputStreet = document.getElementById('demo-input-street');
+      const inputLandmark = document.getElementById('demo-input-landmark');
+      const inputCity = document.getElementById('demo-input-city');
+
+      const data = {
+        clinicName: inputClinic ? inputClinic.value.trim() : '',
+        doctorName: inputDoctor ? inputDoctor.value.trim() : '',
+        phone: inputPhone ? inputPhone.value.trim() : '',
+        street: inputStreet ? inputStreet.value.trim() : '',
+        landmark: inputLandmark ? inputLandmark.value.trim() : '',
+        city: inputCity ? inputCity.value.trim() : ''
+      };
+
+      window.applyClinicData(data, true);
+      window.closeDemoCustomizerModal();
+    };
+
+    // Keyboard shortcut Ctrl + Shift + E and Escape
+    document.addEventListener('keydown', function(e) {
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'E' || e.key === 'e')) {
+        e.preventDefault();
+        const triggerWrap = document.getElementById('demo-customizer-trigger-wrap');
+        if (triggerWrap) triggerWrap.style.display = 'block';
+        const modal = document.getElementById('demo-customizer-modal');
+        if (modal && modal.style.display === 'flex') {
+          window.closeDemoCustomizerModal();
+        } else {
+          window.openDemoCustomizerModal();
+        }
+      }
+      if (e.key === 'Escape') {
+        window.closeDemoCustomizerModal();
+      }
+    });
+
+    // Close when clicking modal backdrop
+    document.addEventListener('click', function(e) {
+      const modal = document.getElementById('demo-customizer-modal');
+      if (modal && e.target === modal) {
+        window.closeDemoCustomizerModal();
+      }
+    });
+
+    // Run on load immediately
+    (function() {
+      const initialData = window.getCurrentClinicData();
+      window.applyClinicData(initialData, false);
+    })();
+  </script>
 
   <!-- Core JavaScript (Supports both folder and flat structure) -->
   <script src="js/app.js"></script>
