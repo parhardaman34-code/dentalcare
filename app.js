@@ -1,5 +1,7 @@
 /**
- * Apex Smile Dental Care - Core Interactive Script
+ * Dr Charan Singh Dental & Implant Centre (Phagwara, Punjab)
+ * LGBTQ+ Friendly Dental & Implant Practice
+ * Core Interactive Script
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -186,8 +188,8 @@ function initBookingForm() {
     const options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
     const formattedDate = dateObj.toLocaleDateString('en-US', options);
 
-    // Random booking reference
-    const refCode = 'APX-' + Math.floor(1000 + Math.random() * 9000);
+    // Random booking reference for Dr Charan Singh Centre
+    const refCode = 'DCS-' + Math.floor(1000 + Math.random() * 9000);
 
     // Update modal details
     document.getElementById('modal-ref-id').textContent = refCode;
@@ -196,12 +198,12 @@ function initBookingForm() {
     document.getElementById('modal-treatment').textContent = treatment;
     document.getElementById('modal-slot').textContent = `${formattedDate} (${shift})`;
 
-    // Configure WhatsApp Button
+    // Configure WhatsApp Message Button
     if (whatsappSendBtn) {
       const waMessage = encodeURIComponent(
-        `Hello Apex Smile Dental Care! 👋\nI have requested an appointment:\n\n• Ref: ${refCode}\n• Name: ${name}\n• Phone: ${phone}\n• Treatment: ${treatment}\n• Preferred Slot: ${formattedDate} (${shift})\n\nPlease confirm my slot!`
+        `Hello Dr Charan Singh Dental & Implant Centre! 👋\nI have requested an appointment:\n\n• Ref: ${refCode}\n• Patient: ${name}\n• Phone: ${phone}\n• Treatment: ${treatment}\n• Preferred Slot: ${formattedDate} (${shift})\n\nPlease confirm my appointment slot at Scheme No. 3, Phagwara!`
       );
-      whatsappSendBtn.href = `https://wa.me/919876543210?text=${waMessage}`;
+      whatsappSendBtn.href = `https://wa.me/919915515559?text=${waMessage}`;
     }
 
     // Show Modal
@@ -266,7 +268,7 @@ function initFaqAccordion() {
 }
 
 /* ----------------------------------------------------
- * 6. Live Clinic Status Indicator
+ * 6. Live Clinic Status Indicator (Phagwara Timings)
  * ---------------------------------------------------- */
 function updateClinicStatus() {
   const statusBadge = document.getElementById('clinic-status-badge');
@@ -276,7 +278,7 @@ function updateClinicStatus() {
   if (!statusBadge || !statusText) return;
 
   const now = new Date();
-  const day = now.getDay(); // 0 is Sunday
+  const day = now.getDay(); // 0 is Sunday, 1 is Monday, ..., 6 is Saturday
   const hours = now.getHours();
   const minutes = now.getMinutes();
   const currentTime = hours + minutes / 60;
@@ -284,33 +286,28 @@ function updateClinicStatus() {
   let isOpen = false;
   let message = '';
 
-  if (day === 0) {
-    // Sunday: 10:00 AM - 1:30 PM (10.0 to 13.5)
-    if (currentTime >= 10.0 && currentTime < 13.5) {
-      isOpen = true;
-      message = 'Open Now (Sunday OP until 1:30 PM)';
-    } else {
-      isOpen = false;
-      message = 'Closed (Sunday Emergency on Call)';
-    }
-  } else {
-    // Mon - Sat: Morning OP (9.5 to 14.0) & Evening OP (16.5 to 20.5)
+  if (day >= 1 && day <= 6) {
+    // Monday – Saturday: Morning 9:30 AM - 2:00 PM (9.5 to 14.0), Evening 4:30 PM - 8:00 PM (16.5 to 20.0)
     if (currentTime >= 9.5 && currentTime < 14.0) {
       isOpen = true;
       message = 'Open Now • Morning OP until 2:00 PM';
-    } else if (currentTime >= 16.5 && currentTime < 20.5) {
-      isOpen = true;
-      message = 'Open Now • Evening OP until 8:30 PM';
-    } else if (currentTime < 9.5) {
-      isOpen = false;
-      message = 'Closed Now • Opens at 9:30 AM';
     } else if (currentTime >= 14.0 && currentTime < 16.5) {
       isOpen = false;
       message = 'Break • Evening OP Opens at 4:30 PM';
+    } else if (currentTime >= 16.5 && currentTime < 20.0) {
+      isOpen = true;
+      message = 'Open Now • Evening OP until 8:00 PM';
+    } else if (currentTime < 9.5) {
+      isOpen = false;
+      message = 'Closed Now • Opens today at 9:30 AM';
     } else {
       isOpen = false;
-      message = 'Closed Now • Opens tomorrow at 9:30 AM';
+      message = (day === 6) ? 'Closed Now • Sunday By Appointment' : 'Closed Now • Opens tomorrow at 9:30 AM';
     }
+  } else {
+    // Sunday
+    isOpen = false;
+    message = 'Sunday • By Prior Appointment Only';
   }
 
   statusText.textContent = message;
@@ -330,93 +327,93 @@ function updateClinicStatus() {
 const treatmentDetailsData = {
   'rct': {
     title: 'Single-Sitting Rotary Root Canal (RCT)',
-    tag: '100% Painless Endodontics',
-    duration: '45 - 60 Minutes (Single Sitting)',
-    anesthesia: 'Computer-Controlled Local Numbing',
-    recovery: 'Immediate normal activities, mild soreness for 24h',
-    overview: 'Our clinic uses 6th generation motorized rotary nickel-titanium files with integrated 3D electronic apex locators. Infection is cleared thoroughly and sealed with thermoplastic bio-ceramic obturation in a single appointment, eliminating multi-visit discomfort.',
+    tag: 'Gentle, Pain-Free Endodontics',
+    duration: '40 - 50 Minutes (Single Visit)',
+    anesthesia: 'Computer-Controlled Painless Numbing',
+    recovery: 'Immediate normal routine, zero surgical trauma',
+    overview: 'Using advanced rotary endodontics and sub-millimeter digital apex locators, Dr. Charan Singh cleans, sterilizes, and seals infected tooth canals in a single comfortable visit, preserving your natural tooth and instantly eliminating pain.',
     benefits: [
-      'Zero pain or pinch with computer-calibrated local anesthesia',
-      'Advanced digital apex locator for sub-millimeter precision',
-      'Preserves your natural tooth structure for decades',
-      'Same-day temporary or permanent ceramic crown placement option'
+      'Fast relief from acute toothache and thermal sensitivity',
+      'Digital precision apex locators for exact sub-millimeter canal measurement',
+      'Preserves your natural tooth structure for years to come',
+      'Protective ceramic & zirconia crown restoration options available'
     ],
-    pricing: 'Starting at ₹4,500 with zero-cost EMI plans available'
+    pricing: 'Transparent upfront pricing • UPI & Cards accepted • 0% Interest EMI available'
   },
   'implants': {
-    title: 'Precision Dental Implants',
-    tag: 'Permanent Natural Tooth Replacement',
-    duration: '30 - 45 Minutes per implant',
-    anesthesia: 'Micro-Anesthesia + Optional Conscious Sedation',
+    title: 'Permanent Precision Dental Implants',
+    tag: 'Natural-Looking Tooth Replacement',
+    duration: '30 - 45 Minutes per implant placement',
+    anesthesia: 'Gentle Micro-Local Anesthesia',
     recovery: '2 - 3 Days soft diet, permanent osseointegration',
-    overview: 'Dental implants are medical-grade titanium and zirconia roots surgically positioned into your jawbone. They look, feel, and function exactly like natural healthy teeth, preventing jawbone shrinkage and restoring 100% chewing force.',
+    overview: 'Dental implants are medical-grade titanium roots placed into the jawbone that support lifelike crowns, bridges, or full arches—restoring 100% natural chewing strength, appearance, and confidence.',
     benefits: [
-      'Lifetime warranty with Swiss & German implant systems (Straumann/Nobel)',
-      'CBCT 3D guided computer surgery prevents nerve impingement',
-      'Zero damage to neighboring adjacent natural teeth',
-      'Eat crunchy nuts, apples, and tough foods with complete confidence'
+      'Restores 100% natural chewing strength and aesthetic smile',
+      'Prevents jawbone loss and keeps adjacent natural teeth firmly in place',
+      'Never slips, clicks, or requires adhesives unlike traditional dentures',
+      'Built to last a lifetime with proper routine dental hygiene'
     ],
-    pricing: 'Starting at ₹24,999 with 0% EMI (₹2,083/month for 12 mos)'
+    pricing: 'Convenient 0% Interest EMI plans available • All UPI & Cards accepted'
   },
   'aligners': {
-    title: 'Clear Aligners & Invisible Braces',
-    tag: 'Discreet Orthodontic Straightening',
+    title: 'Clear Aligners & Orthodontic Care',
+    tag: 'Discreet Smile Alignment',
     duration: '4 - 9 Months average treatment time',
     anesthesia: 'None required (completely non-invasive)',
-    recovery: 'No downtime; trays changed every 10-14 days',
-    overview: 'Customized clear plastic trays engineered via 3D intraoral digital scans. Straightens crooked teeth, closes gaps, and fixes overbites discreetly without ugly wires, brackets, or emergency wire pricks.',
+    recovery: 'No downtime; aligners changed every 1-2 weeks',
+    overview: 'Custom 3D-scanned invisible aligners designed to gently align crooked teeth and close gaps without awkward metal brackets, wires, or dietary restrictions.',
     benefits: [
-      '100% transparent and virtually invisible to colleagues and friends',
-      'Removable for meals, brushing, and special celebrations',
-      'Digital 3D outcome preview: see your final smile before starting',
-      'Zero wire-tightening visits—comfortable gentle tooth movement'
+      'Virtually invisible clear material fits comfortably over teeth',
+      'Easily removable for regular eating, brushing, and flossing',
+      'Fewer clinic visits with gentle, gradual orthodontic alignment',
+      'Effective for spacing, crowding, and bite corrections'
     ],
-    pricing: 'Full treatment starting at ₹45,000 (EMI from ₹3,750/month)'
+    pricing: 'Transparent treatment package with flexible monthly EMI installment plans'
   },
   'whitening': {
-    title: 'Cold-Laser Teeth Whitening',
-    tag: 'Brighter Smile in 45 Minutes',
-    duration: '45 Minutes in clinic chair',
-    anesthesia: 'Gingival barrier protection (zero injection)',
-    recovery: 'Immediate glowing results; avoid dark curries/coffee for 48h',
-    overview: 'Professional laser teeth whitening utilizes pharmaceutical-grade hydrogen peroxide activated by specific blue spectrum cold laser light. It breaks down deep molecular stains from tea, coffee, smoking, and aging safely.',
+    title: 'Professional Laser Teeth Whitening',
+    tag: 'Brighter, Radiant Smile',
+    duration: '45 - 60 Minutes in chair',
+    anesthesia: 'Protective gingival barrier (no injections)',
+    recovery: 'Immediate brighter results',
+    overview: 'Safe, clinical-grade teeth whitening that lifts deep stains from coffee, tea, and everyday life in a single comfortable visit.',
     benefits: [
-      'Up to 6 to 8 shades noticeably whiter in a single visit',
-      'Formulated with potassium nitrate desensitizers for zero post-sensitivity',
-      'Safely preserves dental enamel and gum health',
-      'Includes complimentary home maintenance kit and sensitivity paste'
+      'Visibly brighter results up to several shades lighter in one appointment',
+      'Enamel-safe formulation minimizes tooth sensitivity',
+      'Even, professional results far superior to over-the-counter strips',
+      'Includes post-treatment care recommendations for lasting shine'
     ],
-    pricing: 'In-office full session starting at ₹6,500'
+    pricing: 'Affordable in-clinic whitening packages • Complete shade guarantee'
   },
   'wisdom': {
-    title: 'Safe Wisdom Tooth Extraction',
-    tag: 'Painless Minor Oral Surgery',
+    title: 'Gentle Tooth & Wisdom Extractions',
+    tag: 'Safe, Comfortable Minor Oral Care',
     duration: '20 - 40 Minutes',
-    anesthesia: 'Atraumatic Local Anesthesia block',
-    recovery: '3 - 5 days mild recovery with PRF healing gel',
-    overview: 'Impacted or horizontally angled wisdom teeth frequently cause severe jaw aches, cheek biting, and damage to adjacent molars. Our specialist oral maxillofacial surgeons extract them safely with micro-instruments and PRF (platelet-rich fibrin).',
+    anesthesia: 'Thorough Pain-Free Local Numbing',
+    recovery: '3 - 5 days standard healing with simple home care',
+    overview: 'When an impacted or damaged wisdom tooth causes pain or crowding, Dr. Charan Singh performs atraumatic, gentle extractions with patient comfort as top priority.',
     benefits: [
-      'Minimally invasive atraumatic sectioning minimizes bone loss',
-      'Platelet-Rich Fibrin (PRF) from your own blood accelerates socket healing by 50%',
-      'Detailed 3D panoramic imaging maps mandibular nerve safely',
-      'Zero pain during procedure with attentive gentle care'
+      'Relieves persistent jaw pain, gum irritation, and crowding pressure',
+      'Careful atraumatic technique preserves surrounding bone and tissue',
+      'Clear, supportive post-operative instructions for swift recovery',
+      'Thorough pre-procedure digital X-rays to plan safe extraction'
     ],
-    pricing: 'Starting at ₹3,500 depending on impaction level'
+    pricing: 'Upfront transparent cost • Immediate pain-relief medications provided'
   },
   'pediatric': {
-    title: 'Gentle Pediatric Dentistry',
-    tag: 'Happy, Fear-Free Dental Care for Kids',
-    duration: '30 Minutes interactive session',
-    anesthesia: 'Fruit-flavored topical numbing gel',
-    recovery: 'Immediate smiling return to play',
-    overview: 'Childhood dental experiences shape lifelong dental health. Our clinic features a warm, colorful pediatric lounge where gentle specialists explain every step playfully, turning checkups into fun adventures.',
+    title: 'Gentle Kids & Family Dentistry',
+    tag: 'Friendly Care for Children',
+    duration: '30 Minutes interactive visit',
+    anesthesia: 'Mild topical numbing gel when needed',
+    recovery: 'Immediate happy return to school & play',
+    overview: 'We treat children with warmth, patience, and anxiety-free gentle methods to establish healthy dental habits for life.',
     benefits: [
-      'Painless cavity fillings with biocompatible tooth-colored glass ionomer',
-      'Fluoride varnish treatments & pit and fissure sealants to prevent decay',
-      'Thumb-sucking, mouth breathing, and bite habit correction therapy',
-      'Zero-scare philosophy with reward tokens and brave smile certificates'
+      'Child-friendly, welcoming atmosphere that eliminates dental fear',
+      'Cavity prevention with painless dental sealants and fluoride',
+      'Gentle tooth-colored fillings for growing smiles',
+      'Interactive guidance on proper brushing and oral hygiene at home'
     ],
-    pricing: 'Pediatric consultation ₹500 (Free with preventive sealants)'
+    pricing: 'Affordable preventive dental care packages for families'
   }
 };
 
